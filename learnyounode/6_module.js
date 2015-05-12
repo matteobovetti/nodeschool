@@ -7,16 +7,11 @@ module.exports = function (dirname, fileext, callback) {
         if (err) 
             return callback(err);
         
-        flist = [];
-        
-        list.forEach(function(file) {
-            if (path.extname(file) === "." + fileext) {
-                flist.push(file);
-                callback(null, file);
-            }
+        list = list.filter(function(file) {
+            return (path.extname(file) === "." + fileext);
         });
-        return flist;
+
+        return callback(null, list);
+
     });
-    
-    // callback(null, flist);
 }
